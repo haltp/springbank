@@ -4,6 +4,6 @@
 
 <configuration>
 	<typeAliases>
-		<package name="com.yedam"/>
+		<package name="com.company"/>
 	</typeAliases>
 </configuration>

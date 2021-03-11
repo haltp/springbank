@@ -4,12 +4,18 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for the application home page.
@@ -36,4 +42,37 @@ public class HomeController {
 		return "home";
 	}
 	
+	//페이지 이동
+	@GetMapping("/getBiz")
+	public String getBizForm() {
+		return "bank/getBiz";
+	}
+	
+	
+	//크롤링결과 조회
+	@PostMapping("/getBiz")
+	public String getBiz(@RequestParam String bizno, Model model) {	//vo, map, string 상관없다
+		//크롤링 회사명 찾아서
+		String url = "https://bizno.net/?query=504-86-00471";
+		Document doc = Jsoup.connect(url).get();
+		Elements element = doc.select("____");
+		String bizName = element.text();
+		System.out.println(bizName);
+		
+		//모델에 저장하여 뷰페이지로 전달
+		model.adAttribute("bizname", bizName);
+		return "bank/getBiz";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
