@@ -1,5 +1,6 @@
 package com.company.temp;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -51,17 +52,16 @@ public class HomeController {
 	
 	//크롤링결과 조회
 	@PostMapping("/getBiz")
-	public String getBiz(@RequestParam String bizno, Model model) {	//vo, map, string 상관없다
+	public String getBiz(@RequestParam String bizno, Model model) throws IOException {	//vo, map, string 상관없다
 		//크롤링 회사명 찾아서
-		String url = "https://bizno.net/?query=504-86-00471";
-		String str = document.querySelector(".titles > a > h4").innerText;
+		String url = "https://bizno.net/?query="+ bizno;
 		Document doc = Jsoup.connect(url).get();
-		Elements element = doc.select("str");
+		Elements element = doc.select(".titles > a > h4");
 		String bizName = element.text();
 		System.out.println(bizName);
 		
 		//모델에 저장하여 뷰페이지로 전달
-		model.adAttribute("bizname", bizName);
+		model.addAttribute("bizname", bizName);
 		return "bank/getBiz";
 	}
 }
