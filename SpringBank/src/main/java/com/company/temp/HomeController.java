@@ -54,8 +54,9 @@ public class HomeController {
 	public String getBiz(@RequestParam String bizno, Model model) {	//vo, map, string 상관없다
 		//크롤링 회사명 찾아서
 		String url = "https://bizno.net/?query=504-86-00471";
+		String str = document.querySelector(".titles > a > h4").innerText;
 		Document doc = Jsoup.connect(url).get();
-		Elements element = doc.select("____");
+		Elements element = doc.select("str");
 		String bizName = element.text();
 		System.out.println(bizName);
 		
