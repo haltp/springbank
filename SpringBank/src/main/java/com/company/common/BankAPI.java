@@ -12,7 +12,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -20,6 +25,36 @@ import com.google.gson.JsonParser;
 
 @Component
 public class BankAPI {
+	
+	String host = "https://testapi.openbanking.or.kr";
+	String client_id = "6ff5b4c8-02a0-4eee-a6d8-b4e8e25f34e5";
+	String client_secret = "5e2b1b38-5e81-40ba-b82c-251e9e105e4c";
+	String org_access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJNMjAyMTExNjczIiwic2NvcGUiOlsib29iIl0sImlzcyI6Imh0dHBzOi8vd3d3Lm9wZW5iYW5raW5nLm9yLmtyIiwiZXhwIjoxNjIzMzA2ODg1LCJqdGkiOiI4MDFmOGU1Zi1hMjZjLTQxMzItOGQzOS04NWFlMzhjNjIyZmIifQ.dip00S4PJ5vc1gD7gU7YOyLbORXAtjpKUWcZDVGDIIA";
+	
+	public Map<String, Object> getOrgAccessTokenRestTemplate() {
+		String reqURL = host + "/oauth/2.0/token";   
+        
+        MultiValueMap<String, String> param = new LinkedMultiValueMap<String, String>();
+        param.add("client_id", client_id);
+        param.add("client_secret", client_secret);
+        param.add("scope", "oob");
+        param.add("grant_type", "client_credentials");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+
+        HttpEntity<MultiValueMap<String, String>> request = 
+        		new HttpEntity<MultiValueMap<String, String>>( param, headers);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        Map map = restTemplate.postForObject(
+        		reqURL,
+		        request,
+		        Map.class		);
+        return map;
+	}
+	
+	
 	
 	public Map<String, Object> getOrgAccessToKen () {
         String reqURL = "https://testapi.openbanking.or.kr/oauth/2.0/token";

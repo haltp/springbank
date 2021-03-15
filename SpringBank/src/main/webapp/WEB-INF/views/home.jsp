@@ -15,5 +15,7 @@
 <a href="getOrgAuthorize">기관인증</a></br>
 <a href="getAccountList">전체계좌조회</a></br>
 <a href="getBiz">크롤링</a></br>
+<a href="pdf/empList">emplist pdf</a></br>
+<a href="pdf/empList2?dept=50">emplist2 pdf</a></br>
 </body>
 </html>
