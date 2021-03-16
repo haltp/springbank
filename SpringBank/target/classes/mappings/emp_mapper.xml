@@ -10,4 +10,10 @@
 		   email "email"
     from employees
 	</select>
+	
+	<!-- 일별 판매합계 -->
+	<!-- vo일때 map일때 구분하기// vo일때 string으로 들어가서 parseint해야하고 map일때 자기 타입 그대로 들어간다  -->
+	<select id="getDaySum" resultType="map">	
+		SELECT TO_CHAR(SALE_DATE, 'yy-mm-dd') AS 날짜, SUM(SALE_PRICE*SALE_QTY) AS 일별합계 FROM SALE_TBL_10 GROUP BY SALE_DATE
+	</select>
 </mapper>

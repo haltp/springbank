@@ -4,16 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.company.common.SaleVO;
 import com.company.temp.service.impl.EmpMapper;
-
 
 @Controller
 public class ExelPdfController {
@@ -31,25 +30,23 @@ public class ExelPdfController {
 		return "commonExcelView"; // CommonExcelView이러면 jsp 찾아간다 반드시 소문자 시작
 	}
 
-	
-		
 	@RequestMapping("/pdf/empList")
 	public String getPdfEmpList(Model model) {
 		model.addAttribute("filename", "/reports/empList.jasper");
 		return "pdfView";
 	}
-	
+
 	@RequestMapping("/pdf/empList2")
 	public String getPdfEmpList2(Model model, @RequestParam String dept) {
-		//파라미터 맵
+		// 파라미터 맵
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("P_DEPARTMENT_ID", dept);
-		
+
 		model.addAttribute("filename", "/reprots/empList2.jasper");
 		model.addAttribute("filename", "/reprots/empList2.jasper");
-		return"pdfView";
+		return "pdfView";
 	}
-	
+
 //	@RequestMapping("/pdf/empList3")
 //	public void getPdfEmpList3(HttpServletRequest response) throws Exception {
 //		Connection conn = ConnectionManager.getConnnect();
@@ -59,5 +56,11 @@ public class ExelPdfController {
 //		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperFile, null, conn);
 //		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream())
 //	}
-	
+
+	@RequestMapping("/getChartData")
+	@ResponseBody
+	public List<Map<String, Object>> getChartData(SaleVO vo) {
+		return empMapper.getDaySum(vo);
+	}
+
 }

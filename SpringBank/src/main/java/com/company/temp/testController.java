@@ -36,74 +36,74 @@ public class testController {
 		return "/";
 	}
 
-//	// 배열 request.getParameterValues()
-//	@RequestMapping("/getTest3")
-//	public String getTest3(@RequestParam String[] hobby) {
-//		System.out.println(hobby[0] + "," + hobby[1]);
-//		return "/";
-//	}
-
-//	// 배열 request.getParameterValues()
-//	@RequestMapping("/getTest3")
-//	public String getTest3(@RequestParam String[] hobby) {
-//		System.out.println(Arrays.asList(hobby));
-//		return "/";
-//	}
-
 	// 배열 request.getParameterValues()
 	@RequestMapping("/getTest3")
-	public String getTest3(@RequestParam("hobby") String[] hobbies) {
+	public String getTest3(@RequestParam String[] hobby) {
+		System.out.println(hobby[0] + "," + hobby[1]);
+		return "/";
+	}
+
+	// 배열 request.getParameterValues()
+	@RequestMapping("/getTest4")
+	public String getTest4(@RequestParam String[] hobby) {
+		System.out.println(Arrays.asList(hobby));
+		return "/";
+	}
+
+	// 배열 request.getParameterValues()
+	@RequestMapping("/getTest5")
+	public String getTest5(@RequestParam("hobby") String[] hobbies) {
 		System.out.println(Arrays.asList(hobbies));
 		return "/";
 	}
 
-//	// JSON
-//	@RequestMapping("/getTest4")
-//	public String getTest4(@RequestBody testVO vo) {
-//		System.out.println(vo);
-//		return "/";
-//	}
-
-//	// JSON 배열
-//	@RequestMapping("/getTest4")
-//	public String getTest4(@RequestBody List<testVO> vo) {
-//		System.out.println(vo);
-//		return "/";
-//	}
-
-	// JSON 배열
-	@RequestMapping("/getTest4")
-	public String getTest4(@RequestBody List<Map> vo) {
+	// JSON
+	@RequestMapping("/getTest6")
+	public String getTest6(@RequestBody testVO vo) {
 		System.out.println(vo);
 		return "/";
 	}
 
-//	// @PathVariable
-//	@RequestMapping("/getTest5/{firstName}")
-//	public String getTest5(@PathVariable String firstName) {
-//		System.out.println(firstName);
-//		return "/";
-//	}
+	// JSON 배열
+	@RequestMapping("/getTest7")
+	public String getTest7(@RequestBody List<testVO> vo) {
+		System.out.println(vo);
+		return "/";
+	}
 
-//	// @PathVariable 값두개
-//	@RequestMapping("/getTest5/{firstName}/{salary}")
-//	public String getTest5(@PathVariable String firstName, @PathVariable int salary) {
-//		System.out.println(firstName + "," + salary);
-//		return "/";
-//	}
+	// JSON 배열
+	@RequestMapping("/getTest8")
+	public String getTest8(@RequestBody List<Map> vo) {
+		System.out.println(vo);
+		return "/";
+	}
 
-//	// @PathVariable 값두개 vo에 담을 때
-//	@RequestMapping("/getTest5/{firstName}/{salary}")
-//	public String getTest5(@PathVariable String firstName, @PathVariable int salary, testVO vo) {
-//		vo.setFirstName(firstName);
-//		vo.setSalary(salary);
-//		System.out.println(vo);
-//		return "/";
-//	}
+	// @PathVariable
+	@RequestMapping("/getTest9/{firstName}")
+	public String getTest9(@PathVariable String firstName) {
+		System.out.println(firstName);
+		return "/";
+	}
+
+	// @PathVariable 값두개
+	@RequestMapping("/getTest10/{firstName}/{salary}")
+	public String getTest10(@PathVariable String firstName, @PathVariable int salary) {
+		System.out.println(firstName + "," + salary);
+		return "/";
+	}
+
+	// @PathVariable 값두개 vo에 담을 때
+	@RequestMapping("/getTest11/{firstName}/{salary}")
+	public String getTest11(@PathVariable String firstName, @PathVariable int salary, testVO vo) {
+		vo.setFirstName(firstName);
+		vo.setSalary(salary);
+		System.out.println(vo);
+		return "/";
+	}
 
 	// @PathVariable 값두개 vo에 담을 때, Model로 담기 ,test뷰페이지로 이동
-	@RequestMapping("/getTest5/{firstName}/{salary}")
-	public String getTest5(@PathVariable String firstName, @PathVariable int salary, testVO vo, Model model) {
+	@RequestMapping("/getTest12/{firstName}/{salary}")
+	public String getTest12(@PathVariable String firstName, @PathVariable int salary, testVO vo, Model model) {
 		vo.setFirstName(firstName);
 		vo.setSalary(salary);
 		System.out.println(vo);
@@ -112,8 +112,8 @@ public class testController {
 	}
 
 	// @PathVariable testVO를 ttvo로 이름변경하고플때
-	@RequestMapping("/getTest6/{firstName}/{salary}")
-	public String getTest6(@PathVariable String firstName, 
+	@RequestMapping("/getTest13/{firstName}/{salary}")
+	public String getTest13(@PathVariable String firstName, 
 							@PathVariable int salary, 
 							@ModelAttribute("ttvo")testVO vo, 
 							Model model) {
@@ -125,8 +125,8 @@ public class testController {
 	}
 	
 	//ModelAndView
-	@RequestMapping("/getTest7/{firstName}/{salary}")
-	public ModelAndView getTest7(@PathVariable String firstName, 
+	@RequestMapping("/getTest14/{firstName}/{salary}")
+	public ModelAndView getTest14(@PathVariable String firstName, 
 							@PathVariable int salary, 
 							@ModelAttribute("ttvo")testVO vo, 
 							Model model) {
@@ -140,8 +140,8 @@ public class testController {
 	
 	//응답결과 json
 	//@ResponseBody밑에 말고 여기적어도 됨
-	@RequestMapping("/getTest8/{firstName}/{salary}")
-	public @ResponseBody testVO getTest8(@PathVariable String firstName, 
+	@RequestMapping("/getTest15/{firstName}/{salary}")
+	public @ResponseBody testVO getTest15(@PathVariable String firstName, 
 							@PathVariable int salary, 
 							testVO vo ) {
 		vo.setFirstName(firstName);
@@ -150,8 +150,8 @@ public class testController {
 	}
 	//응답결과 json
 	//@ResponseBody밑에 말고 여기적어도 됨
-	@RequestMapping("/getTest9")
-	public @ResponseBody List<Map> getTest9() {
+	@RequestMapping("/getTest16")
+	public @ResponseBody List<Map> getTest16() {
 		List list = new ArrayList<>();
 		Map<String, String> map = new HashMap<>();
 		map.put("name", "park");
